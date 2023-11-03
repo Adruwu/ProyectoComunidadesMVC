@@ -1,0 +1,40 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.custom-button {
+
+    height: 50px;
+    width: 200px;
+
+    background-color: #007BFF; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    border: none; /* Borde del botón */
+    border-radius: 5px; /* Borde redondeado */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    margin: 5px; /* Margen exterior del botón */
+}
+
+    .custom-button:hover {
+        background-color: #0056b3; /* Color de fondo del botón al pasar el cursor sobre él */
+    }
