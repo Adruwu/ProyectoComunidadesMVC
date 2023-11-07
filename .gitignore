@@ -1,5 +1,2 @@
 # SQL Server
-*.mdf
-*.ldf
-/DB/MVCProyectoComunidades.mdf
-/DB/MVCProyectoComunidades.ldf
+
