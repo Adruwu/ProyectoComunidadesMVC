@@ -5,6 +5,7 @@ namespace ProyectoComunidadesRelativo.Models
 {
     public class User : IListable
     {
+        public User() { }
         public User(string username, string pass, int age, string email, string description)
         {
             Username = username;

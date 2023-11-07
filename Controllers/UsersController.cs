@@ -6,16 +6,13 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ProyectoComunidadesRelativo.DB;
 using ProyectoComunidadesRelativo.Models;
 
 namespace ProyectoComunidadesRelativo.Controllers
 {
     public class UsersController : Controller
     {
-        
-
-
-
 
         private readonly ApplicationDbContext _context;
         private readonly CheckService _checkService;
@@ -25,8 +22,6 @@ namespace ProyectoComunidadesRelativo.Controllers
             _checkService = checkService;
 
         }
-
-
 
 
         // GET: Users
