@@ -75,16 +75,16 @@ namespace ProyectoComunidadesRelativo.Controllers
             return View(user);
         }
 
-        // GET: Users/Create
-        public IActionResult Create()
+        // GET: Users/Register
+        public IActionResult Register()
         {
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Users/Register
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Username,Pass,Age,Email,Description")] User user)
+        public async Task<IActionResult> Register([Bind("Id,Username,Pass,Age,Email,Description")] User user)
         {
             if (ModelState.IsValid)
             {

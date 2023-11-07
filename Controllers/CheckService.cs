@@ -10,6 +10,7 @@ namespace ProyectoComunidadesRelativo.Controllers
 {
     public class CheckService
     {
+        /*
         static DatabaseManagement DBInstance = new DatabaseManagement();
         GenericList<User> userList = DBInstance.GetUsersDB();
         CommunityManagement CMInstance = new CommunityManagement();
@@ -25,6 +26,7 @@ namespace ProyectoComunidadesRelativo.Controllers
         ICheckStrategy userEmailChecker = factory.CreateCheckStrategy("UserEmail");
         ICheckStrategy usernameLengthChecker = factory.CreateCheckStrategy("UsernameLength");
         ICheckStrategy usernamePatternChecker = factory.CreateCheckStrategy("UsernamePattern");
+        */
 
         private readonly ApplicationDbContext _context;
 
@@ -32,15 +34,22 @@ namespace ProyectoComunidadesRelativo.Controllers
         {
             _context = context;
         }
-
+        
         public bool IsValidUser(string username, string password)
         {
+            var user = _context.Users.FirstOrDefault(u => u.Username == username);
 
+            if (user != null)
+            {
+                var passwordEntry = _context.Passwords.FirstOrDefault(p => p.User_id == user.Id && p.Pass == password);
 
-            var user = _context.Users.FirstOrDefault(u => u.Username == username && u.Pass == password);
+                if (passwordEntry != null)
+                {
+                    return true;
+                }
+            }
 
-            return user != null;
+            return false;
         }
     }
-
 }
