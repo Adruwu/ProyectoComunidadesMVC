@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ProyectoComunidades.Controllers.Checks;
 using ProyectoComunidadesRelativo.Controllers;
 using ProyectoComunidadesRelativo.DB;
 
@@ -6,10 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 
     // Add services to the container.
     builder.Services.AddControllersWithViews();
-    builder.Services.AddScoped<CheckService>(); // Agrega CheckService al contenedor de servicios
+    builder.Services.AddScoped<ValidateCredentials>(); // Agrega CheckService al contenedor de servicios
+    builder.Services.AddScoped<CheckPasswordPattern>();
 
-    // PROYECTO RAIZ
-    string proyectoRaiz = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\.."));
+// PROYECTO RAIZ
+string proyectoRaiz = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\.."));
 
     AppDomain.CurrentDomain.SetData("DataDirectory", proyectoRaiz);
 

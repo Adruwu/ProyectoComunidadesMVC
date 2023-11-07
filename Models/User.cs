@@ -28,6 +28,9 @@ namespace ProyectoComunidadesRelativo.Models
         [Key]
         public int Id { get; set; }
         public string Username { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
         public string Pass { get; set; }
         public int Age { get; set; }
         public string Email { get; set; }

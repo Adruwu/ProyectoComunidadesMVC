@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ProyectoComunidades.Controllers.Checks;
 using ProyectoComunidadesRelativo.DB;
 using ProyectoComunidadesRelativo.Models;
 
@@ -15,13 +16,17 @@ namespace ProyectoComunidadesRelativo.Controllers
     {
 
         private readonly ApplicationDbContext _context;
-        private readonly CheckService _checkService;
-        public UsersController(ApplicationDbContext context, CheckService checkService)
+        private readonly ValidateCredentials _checkCredentials;
+        private readonly CheckPasswordPattern _passwordChecker;
+        public UsersController(ApplicationDbContext context, ValidateCredentials checkService, CheckPasswordPattern passwordChecker)
         {
             _context = context;
-            _checkService = checkService;
+            _checkCredentials = checkService;
+            _passwordChecker = passwordChecker;
 
         }
+
+    
 
 
         // GET: Users
@@ -42,7 +47,7 @@ namespace ProyectoComunidadesRelativo.Controllers
         [HttpPost]
         public IActionResult Login(LoginViewModel model)
         {
-            if (_checkService.IsValidUser(model.Username, model.Password))
+            if (_checkCredentials.IsValidUser(model.Username, model.Password))
             {
                 // Las credenciales son válidas, inicia la sesión del usuario (implementa esto)
                 // Puedes usar HttpContext.SignInAsync() u otro método de autenticación
@@ -75,6 +80,9 @@ namespace ProyectoComunidadesRelativo.Controllers
             return View(user);
         }
 
+
+
+
         // GET: Users/Register
         public IActionResult Register()
         {
@@ -88,12 +96,25 @@ namespace ProyectoComunidadesRelativo.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Validar la contraseña utilizando CheckPasswordPattern
+                if (!_passwordChecker.Check(user.Pass))
+                {
+                    ModelState.AddModelError("Pass", "ERROR: The password must have at least 1 Capital Letter and 1 Number.");
+                    return View(user);
+                }
+
+                // Continuar con el proceso de registro si la contraseña es válida
                 _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(user);
         }
+
+
+
+
 
         // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
