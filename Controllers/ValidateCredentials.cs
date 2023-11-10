@@ -37,19 +37,8 @@ namespace ProyectoComunidadesRelativo.Controllers
         
         public bool IsValidUser(string username, string password)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Username == username);
-
-            if (user != null)
-            {
-                var passwordEntry = _context.Passwords.FirstOrDefault(p => p.User_id == user.Id && p.Pass == password);
-
-                if (passwordEntry != null)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            var user = _context.Users.FirstOrDefault(u => u.Username == username && u.Pass == password);
+            return user != null;
         }
     }
 }

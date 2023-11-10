@@ -1,40 +1,77 @@
-html {
-    font-size: 14px;
-}
-
-@media (min-width: 768px) {
     html {
-        font-size: 16px;
+        font-size: 14px;
     }
-}
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
+    body {
+        background-color: #f8f9fa;
+    }
 
-html {
-    position: relative;
-    min-height: 100%;
-}
+    @media (min-width: 768px) {
+        html {
+            font-size: 16px;
+        }
+    }
 
-body {
-    margin-bottom: 60px;
-}
+    .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+        box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    }
 
-.custom-button {
+    html {
+        position: relative;
+        min-height: 100%;
+    }
 
-    height: 50px;
-    width: 200px;
+    body {
+        margin-bottom: 60px;
+    }
 
-    background-color: #007BFF; /* Color de fondo del botón */
-    color: #fff; /* Color del texto del botón */
-    padding: 10px 20px; /* Espaciado interno del botón */
-    border: none; /* Borde del botón */
-    border-radius: 5px; /* Borde redondeado */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    margin: 5px; /* Margen exterior del botón */
-}
+    .custom-button {
+        height: 50px;
+        width: 200px;
+        background-color: #007BFF; /* Color de fondo del botón */
+        color: #fff; /* Color del texto del botón */
+        padding: 10px 20px; /* Espaciado interno del botón */
+        border: none; /* Borde del botón */
+        border-radius: 5px; /* Borde redondeado */
+        cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+        margin: 5px; /* Margen exterior del botón */
+    }
 
     .custom-button:hover {
         background-color: #0056b3; /* Color de fondo del botón al pasar el cursor sobre él */
+    }
+
+    .form-signin {
+        width: 100%;
+        max-width: 330px;
+        padding: 15px;
+        margin: auto;
+    }
+
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+
+    .form-signin input[type="text"] {
+        margin-bottom: 10px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 20px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .container {
+        padding-top: 70px;
     }
