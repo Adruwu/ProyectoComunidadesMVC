@@ -35,17 +35,6 @@ namespace ProyectoComunidades.Controllers.Checks
 			}
 			return true;
 		}
-        public int GetAdultAge(string birth)
-        {
-            string dateFormat = "dd/MM/yyyy";
-            if (DateTime.TryParseExact(birth, dateFormat, null, System.Globalization.DateTimeStyles.None, out DateTime date))
-            { }
-            int age = DateTime.Now.Year - date.Year;
-            if (DateTime.Now.Month < date.Month || DateTime.Now.Month == date.Month && DateTime.Now.Day < date.Day)
-            {
-                age--;
-            }
-            return age;
-        }
+
     }
 }

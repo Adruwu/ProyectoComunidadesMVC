@@ -11,5 +11,7 @@ namespace ProyectoComunidadesRelativo.DB
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<ProyectoComunidadesRelativo.Models.Community> Community { get; set; } = default!;
+
     }
 }

@@ -27,10 +27,6 @@ namespace ProyectoComunidadesRelativo.Controllers
 
 		}
 
-    
-
-
-        // GET: Users
         public async Task<IActionResult> Index()
         {
               return _context.Users != null ? 
@@ -38,9 +34,7 @@ namespace ProyectoComunidadesRelativo.Controllers
                           Problem("Entity set 'ApplicationDbContext.Users'  is null.");
         }
 
-
-        // LOGIN
-        public IActionResult Login()
+		public IActionResult Login()
         {
             return View();
         }
@@ -50,19 +44,20 @@ namespace ProyectoComunidadesRelativo.Controllers
         {
             if (_checkCredentials.IsValidUser(model.Username, model.Password))
             {
-                return RedirectToAction("Index", "Home"); // Redirige al usuario a la página principal
+                return RedirectToAction("Main", "Users");
             }
 
             // mensaje de error
-			ModelState.AddModelError("Password", "Las credenciales no coinciden");
-
+			ModelState.AddModelError("Password", "Las credenciales no coinciden.");
 			return View(model);
         }
 
+        public IActionResult Main()
+		{
+			return View();
+		}
 
-
-        // GET: Users/Details/5
-        public async Task<IActionResult> Details(int? id)
+		public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Users == null)
             {
@@ -79,16 +74,11 @@ namespace ProyectoComunidadesRelativo.Controllers
             return View(user);
         }
 
-
-
-
-        // GET: Users/Register
         public IActionResult Register()
         {
             return View();
         }
 
-		// POST: Users/Register
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Register([Bind("Id,Username,Pass,ConfirmPassword,Age,Email,Description")] User user)
@@ -109,7 +99,7 @@ namespace ProyectoComunidadesRelativo.Controllers
 					return View(user);
 				}
 
-                var passwordLegnthChecker = _strategyFactory.CreateCheckStrategy("PasswordLegnth");
+                var passwordLegnthChecker = _strategyFactory.CreateCheckStrategy("PasswordLength");
                 if (!passwordLegnthChecker.Check(user.Pass))
                 {
                     ModelState.AddModelError("Pass", "ERROR: The password must be at least 8 characters.");
@@ -155,24 +145,18 @@ namespace ProyectoComunidadesRelativo.Controllers
                 var descriptionChecker = _strategyFactory.CreateCheckStrategy("DescriptionLength");
                 if (!descriptionChecker.Check(user.Description))
                 {
-                    ModelState.AddModelError("Email", "ERROR: Description cannot exceed 200 letters.");
+                    ModelState.AddModelError("Description", "ERROR: Description cannot exceed 200 letters.");
                     return View(user);
                 }
 
-                // Proceso de registro si todas las validaciones son exitosas.
                 _context.Add(user);
 				await _context.SaveChangesAsync();
-				return RedirectToAction(nameof(Index));
+				return RedirectToAction("Index", "Home");
 			}
 
 			return View(user);
 		}
 
-
-
-
-
-		// GET: Users/Edit/5
 		public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Users == null)
@@ -188,7 +172,6 @@ namespace ProyectoComunidadesRelativo.Controllers
             return View(user);
         }
 
-        // POST: Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Username,Pass,Age,Email,Description")] User user)
@@ -221,7 +204,6 @@ namespace ProyectoComunidadesRelativo.Controllers
             return View(user);
         }
 
-        // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Users == null)
@@ -239,7 +221,6 @@ namespace ProyectoComunidadesRelativo.Controllers
             return View(user);
         }
 
-        // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -262,5 +243,6 @@ namespace ProyectoComunidadesRelativo.Controllers
         {
           return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
     }
 }

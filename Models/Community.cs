@@ -1,26 +1,27 @@
-﻿using ProyectoComunidadesRelativo.Controllers.Interfaces;
+﻿using System.ComponentModel.DataAnnotations;
+using ProyectoComunidadesRelativo.Controllers.Interfaces;
 
 namespace ProyectoComunidadesRelativo.Models
 {
     public class Community : IListable
     {
-        private int id;
-        private string name;
-        private string theme;
-        private int numMembers;
-
+        public Community() { }
         public Community(int id, string name, string theme, int numMembers)
         {
-            this.id = id;
-            this.name = name;
-            this.theme = theme;
-            this.numMembers = numMembers;
+            Id = id;
+            Name = name;
+            Theme = theme;
         }
 
-        public int Id { get => id; set => id = value; }
-        public string Name { get => name; set => name = value; }
-        public string Theme { get => theme; set => theme = value; }
-        public int NumMembers { get => numMembers; set => numMembers = value; }
+        [Key]
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Theme { get; set; }
+
+        public override string ToString()
+        {
+            return $"ID: {Id}, Name: {Name}, Theme: {Theme}";
+        }
 
     }
 }
