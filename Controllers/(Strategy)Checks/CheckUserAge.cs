@@ -11,34 +11,19 @@ namespace ProyectoComunidades.Controllers.Checks
 	{
 		public bool Check(params string[] inputs)
 		{
-			string dateFormat = "dd/MM/yyyy";
-			if (DateTime.TryParseExact(inputs[0], dateFormat, null, System.Globalization.DateTimeStyles.None, out DateTime date))
+			if (inputs == null || inputs.Length == 0)
 			{
-				if (CheckAdultAge(date))
-				{
-					return true;
-				}
+				throw new ArgumentException("No se proporcionaron datos de edad.");
+			}
+
+			if (int.TryParse(inputs[0], out int userAge))
+			{
+				return userAge >= 18;
 			}
 			else
 			{
-				Console.WriteLine("ERROR: Enter the correct format");
+				throw new ArgumentException("El dato de edad no es un número válido.");
 			}
-			return false;
-		}
-		public bool CheckAdultAge(DateTime birthDate)
-		{
-			DateTime currentDate = DateTime.Now;
-			int ageInYears = currentDate.Year - birthDate.Year;
-			if (currentDate.Month < birthDate.Month || currentDate.Month == birthDate.Month && currentDate.Day < birthDate.Day)
-			{
-				ageInYears--;
-			}
-			if (!(ageInYears >= 18))
-			{
-				Console.WriteLine("You must be of legal age to register");
-				return false;
-			}
-			return true;
 		}
 
 	}

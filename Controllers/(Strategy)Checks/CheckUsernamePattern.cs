@@ -14,7 +14,7 @@ namespace ProyectoComunidades.Controllers.Checks
 		{
 			if (!Regex.IsMatch(inputs[0], "^(?=.*[A-Z])(?=.*\\d).{5,}"))
 			{
-				Console.WriteLine("ERROR: The User must contain at least 1 Capital Letter and 1 Number.");
+				Console.WriteLine("ERROR: The Username must contain at least 1 Capital Letter and 1 Number.");
 				return false;
 			}
 			return true;

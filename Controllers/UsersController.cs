@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ProyectoComunidades.Controllers._Factory_StrategyFactory;
 using ProyectoComunidades.Controllers.Checks;
 using ProyectoComunidadesRelativo.DB;
 using ProyectoComunidadesRelativo.Models;
@@ -17,14 +18,14 @@ namespace ProyectoComunidadesRelativo.Controllers
 
         private readonly ApplicationDbContext _context;
         private readonly ValidateCredentials _checkCredentials;
-        private readonly CheckPasswordPattern _passwordChecker;
-        public UsersController(ApplicationDbContext context, ValidateCredentials checkService, CheckPasswordPattern passwordChecker)
+		private readonly StrategyFactory _strategyFactory;
+		public UsersController(ApplicationDbContext context, ValidateCredentials checkService, StrategyFactory strategyFactory)
         {
             _context = context;
             _checkCredentials = checkService;
-            _passwordChecker = passwordChecker;
+			_strategyFactory = strategyFactory;
 
-        }
+		}
 
     
 
@@ -49,15 +50,13 @@ namespace ProyectoComunidadesRelativo.Controllers
         {
             if (_checkCredentials.IsValidUser(model.Username, model.Password))
             {
-                // Las credenciales son válidas, inicia la sesión del usuario (implementa esto)
-                // Puedes usar HttpContext.SignInAsync() u otro método de autenticación
-
                 return RedirectToAction("Index", "Home"); // Redirige al usuario a la página principal
             }
 
-            // Las credenciales son inválidas, muestra un mensaje de error
-            ModelState.AddModelError(string.Empty, "Credenciales inválidas");
-            return View(model);
+            // mensaje de error
+			ModelState.AddModelError("Password", "Las credenciales no coinciden");
+
+			return View(model);
         }
 
 
@@ -89,35 +88,92 @@ namespace ProyectoComunidadesRelativo.Controllers
             return View();
         }
 
-        // POST: Users/Register
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("Id,Username,Pass,Age,Email,Description")] User user)
-        {
-            if (ModelState.IsValid)
-            {
-                // Validar la contraseña utilizando CheckPasswordPattern
-                if (!_passwordChecker.Check(user.Pass))
+		// POST: Users/Register
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Register([Bind("Id,Username,Pass,ConfirmPassword,Age,Email,Description")] User user)
+		{
+			if (ModelState.IsValid)
+			{
+				var usernameLengthChecker = _strategyFactory.CreateCheckStrategy("UsernameLength");
+				if (!usernameLengthChecker.Check(user.Username))
+				{
+					ModelState.AddModelError("Username", "ERROR: The Username must have at least 5 characters.");
+					return View(user);
+				}
+
+				var usernamePatternChecker = _strategyFactory.CreateCheckStrategy("UsernamePattern");
+				if (!usernamePatternChecker.Check(user.Username))
+				{
+					ModelState.AddModelError("Username", "ERROR: The Username must contain at least 1 Capital Letter and 1 Number.");
+					return View(user);
+				}
+
+                var passwordLegnthChecker = _strategyFactory.CreateCheckStrategy("PasswordLegnth");
+                if (!passwordLegnthChecker.Check(user.Pass))
                 {
-                    ModelState.AddModelError("Pass", "ERROR: The password must have at least 1 Capital Letter and 1 Number.");
+                    ModelState.AddModelError("Pass", "ERROR: The password must be at least 8 characters.");
                     return View(user);
                 }
 
-                // Continuar con el proceso de registro si la contraseña es válida
+                var passwordPatternChecker = _strategyFactory.CreateCheckStrategy("PasswordPattern");
+				if (!passwordPatternChecker.Check(user.Pass))
+				{
+					ModelState.AddModelError("Pass", "ERROR: The Password must have at least 1 Capital Letter and 1 Number.");
+					return View(user);
+				}
+
+                var passwordMatchChecker = _strategyFactory.CreateCheckStrategy("PasswordMatch");
+                if (!passwordMatchChecker.Check(user.ConfirmPassword, user.Pass))
+                {
+                    ModelState.AddModelError("ConfirmPassword", "ERROR: Passwords do not match.");
+                    return View(user);
+                }
+
+                string ageAsString = user.Age.ToString();
+				var AgeChecker = _strategyFactory.CreateCheckStrategy("UserAge");
+				if (!AgeChecker.Check(ageAsString))
+				{
+					ModelState.AddModelError("Age", "ERROR: You must be at least 18 years old to register.");
+					return View(user);
+				}
+
+				var emailLengthChecker = _strategyFactory.CreateCheckStrategy("EmailLength");
+				if (!emailLengthChecker.Check(user.Email))
+				{
+					ModelState.AddModelError("Email", "ERROR: Emails longer than 40 characters are not accepted.");
+					return View(user);
+				}
+
+				var emailChecker = _strategyFactory.CreateCheckStrategy("UserEmail");
+				if (!emailChecker.Check(user.Email))
+				{
+					ModelState.AddModelError("Email", "ERROR: The email doesn't meet the proper format.");
+					return View(user);
+				}
+
+                var descriptionChecker = _strategyFactory.CreateCheckStrategy("DescriptionLength");
+                if (!descriptionChecker.Check(user.Description))
+                {
+                    ModelState.AddModelError("Email", "ERROR: Description cannot exceed 200 letters.");
+                    return View(user);
+                }
+
+                // Proceso de registro si todas las validaciones son exitosas.
                 _context.Add(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
+				await _context.SaveChangesAsync();
+				return RedirectToAction(nameof(Index));
+			}
 
-            return View(user);
-        }
-
-
+			return View(user);
+		}
 
 
 
-        // GET: Users/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+
+
+		// GET: Users/Edit/5
+		public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Users == null)
             {

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using ProyectoComunidadesRelativo.Controllers.Interfaces;
 
 namespace ProyectoComunidadesRelativo.Models
@@ -28,11 +29,13 @@ namespace ProyectoComunidadesRelativo.Models
         [Key]
         public int Id { get; set; }
         public string Username { get; set; }
+        [DataType(DataType.Password)]
+        public string Pass { get; set; }
+        [NotMapped]
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Pass { get; set; }
-        public int Age { get; set; }
+		public string ConfirmPassword { get; set; }
+		public int Age { get; set; }
         public string Email { get; set; }
         public string Description { get; set; }
 

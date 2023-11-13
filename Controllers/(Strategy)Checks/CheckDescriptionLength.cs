@@ -14,7 +14,7 @@ namespace ProyectoComunidades.Controllers.Checks
 		{
 			if (inputs[0].Length > 200)
 			{
-				Console.WriteLine("ERROR: Description cannot exceed 200 letters");
+				Console.WriteLine("ERROR: Description cannot exceed 200 letters.");
 				return false;
 			}
 			return true;

@@ -1,14 +1,17 @@
 using Microsoft.EntityFrameworkCore;
+using ProyectoComunidades.Controllers._Factory_StrategyFactory;
 using ProyectoComunidades.Controllers.Checks;
 using ProyectoComunidadesRelativo.Controllers;
 using ProyectoComunidadesRelativo.DB;
 
 var builder = WebApplication.CreateBuilder(args);
 
-    // Add services to the container.
-    builder.Services.AddControllersWithViews();
-    builder.Services.AddScoped<ValidateCredentials>(); // Agrega CheckService al contenedor de servicios
-    builder.Services.AddScoped<CheckPasswordPattern>();
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ValidateCredentials>();
+builder.Services.AddScoped<CheckPasswordPattern>();
+builder.Services.AddScoped<StrategyFactory>();  // Agrega StrategyFactory al contenedor de servicios
+
 
 // PROYECTO RAIZ
 string proyectoRaiz = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\.."));
