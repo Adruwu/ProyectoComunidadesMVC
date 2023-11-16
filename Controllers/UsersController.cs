@@ -15,7 +15,6 @@ namespace ProyectoComunidadesRelativo.Controllers
 {
     public class UsersController : Controller
     {
-
         private readonly ApplicationDbContext _context;
         private readonly ValidateCredentials _checkCredentials;
 		private readonly StrategyFactory _strategyFactory;
@@ -24,8 +23,7 @@ namespace ProyectoComunidadesRelativo.Controllers
             _context = context;
             _checkCredentials = checkService;
 			_strategyFactory = strategyFactory;
-
-		}
+        }
 
         public async Task<IActionResult> Index()
         {
@@ -42,18 +40,31 @@ namespace ProyectoComunidadesRelativo.Controllers
         [HttpPost]
         public IActionResult Login(LoginViewModel model)
         {
-            if (_checkCredentials.IsValidUser(model.Username, model.Password))
+            var user = _checkCredentials.GetUser(model.Username, model.Password);
+
+            if (user != null)
             {
+                // Almacenar el ID del usuario y el Username en la sesión
+                HttpContext.Session.SetInt32("UserId", user.Id);
+                HttpContext.Session.SetString("Username", user.Username);
+
                 return RedirectToAction("Main", "Users");
             }
 
-            // mensaje de error
-			ModelState.AddModelError("Password", "Las credenciales no coinciden.");
-			return View(model);
+            ModelState.AddModelError("Password", "Las credenciales no coinciden.");
+            return View(model);
         }
+
+
+
+
 
         public IActionResult Main()
 		{
+			if (HttpContext.Session.GetString("Username") == null)
+			{
+				return RedirectToAction("Index", "Home");
+			}
 			return View();
 		}
 
@@ -85,6 +96,13 @@ namespace ProyectoComunidadesRelativo.Controllers
 		{
 			if (ModelState.IsValid)
 			{
+
+				if (_context.Users.Any(u => u.Username == user.Username))
+				{
+					ModelState.AddModelError("Username", "ERROR: This username is already taken.");
+					return View(user);
+				}
+
 				var usernameLengthChecker = _strategyFactory.CreateCheckStrategy("UsernameLength");
 				if (!usernameLengthChecker.Check(user.Username))
 				{

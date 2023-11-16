@@ -32,6 +32,7 @@ namespace ProyectoComunidades.Controllers._Factory_StrategyFactory
 					return new CheckUsernameLength();
 				case "UsernamePattern":
 					return new CheckUsernamePattern();
+
 				default:
 					throw new ArgumentException("Invalid Strategy.");
 			}

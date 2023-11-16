@@ -1,52 +1,72 @@
+html {
+    font-size: 14px;
+}
+
+:root {
+    --color-primary: #9b6544;
+    --color-secondary: #e5cbb1;
+    --color-accent: #d58936;
+    --color-background: #ffffff;
+}
+
+body {
+    margin-bottom: 60px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa; /* Color de fondo de respaldo */
+    color: #69140e; /* Color de texto de respaldo */
+    background-image: url('/img/wallpaper.jpg'); /* Ruta de la imagen de fondo */
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir el fondo */
+}
+
+
+@media (min-width: 768px) {
     html {
-        font-size: 14px;
+        font-size: 16px;
     }
+}
 
-    body {
-        background-color: #f8f9fa;
-    }
+.col-md-4 {
+    flex: 0 0 auto;
+    width: 100% !important;
+}
 
-    @media (min-width: 768px) {
-        html {
-            font-size: 16px;
-        }
-    }
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: none;
+    outline-color: orange;
+    border-color: orange; /* Añade esto si también deseas cambiar el color del borde */
+}
 
-    .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-        box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-    }
+html {
+    position: relative;
+    min-height: 100%;
+}
 
-    html {
-        position: relative;
-        min-height: 100%;
-    }
-
-    body {
-        margin-bottom: 60px;
-    }
-
-    .custom-button {
-        height: 50px;
-        width: 200px;
-        background-color: #007BFF; /* Color de fondo del botón */
-        color: #fff; /* Color del texto del botón */
-        padding: 10px 20px; /* Espaciado interno del botón */
-        border: none; /* Borde del botón */
-        border-radius: 5px; /* Borde redondeado */
-        cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-        margin: 5px; /* Margen exterior del botón */
-    }
+.custom-button {
+    height: 50px;
+    width: 200px;
+    background-color: #007BFF;
+    color: #fff; 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    background-color: var(--color-primary);
+    color: #fff;
+}
 
     .custom-button:hover {
         background-color: #0056b3; /* Color de fondo del botón al pasar el cursor sobre él */
+        background-color: var(--color-secondary);
+        font-size: 19px;
     }
 
-    .form-signin {
-        width: 100%;
-        max-width: 330px;
-        padding: 15px;
-        margin: auto;
-    }
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
 
     .form-signin .form-control {
         position: relative;
@@ -56,9 +76,9 @@
         font-size: 16px;
     }
 
-    .form-signin .form-control:focus {
-        z-index: 2;
-    }
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
 
     .form-signin input[type="text"] {
         margin-bottom: 10px;
@@ -72,8 +92,136 @@
         border-top-right-radius: 0;
     }
 
-    a {
-        text-decoration: none;
-    } a:hover {
+a {
+    text-decoration: none;
+}
+
+    a:hover {
         text-decoration: none;
     }
+
+.nav-link.text-dark {
+    color: var(--color-text);
+}
+
+.form-signin .form-control {
+    border: 1px solid var(--color-text);
+}
+
+    .form-signin .form-control:focus {
+        border: 1px solid var(--color-accent);
+        box-shadow: none;
+    }
+
+.custom-large-button {
+    height: 60px; /* Ajusta la altura según tus necesidades */
+    width: 250px; /* Ajusta el ancho según tus necesidades */
+    font-size: 18px; /* Ajusta el tamaño de la fuente según tus necesidades */
+}
+
+.footer[b-clqcqngdl0] {
+    line-height: 10px !important;
+}
+
+header {
+    margin-bottom: 50px;
+    background-color: #d58936;
+    padding: 15px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    color: #ffffff;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.navbar-toggler-icon {
+    border-color: #ffffff;
+}
+
+.navbar-nav .nav-link {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.navbar-toggler {
+    border-color: #ffffff;
+}
+
+    .navbar-toggler:focus {
+        box-shadow: none;
+    }
+
+.container {
+    margin-top: 20px;
+}
+
+main {
+    padding-bottom: 20px;
+}
+
+footer {
+    margin-top: 50px;
+    padding: 15px 0;
+    background-color: #e5cbb1;
+    color: #69140e;
+    text-align: center;
+}
+
+/* Botón Logout */
+.logout-button {
+    background-color: #495057; /* Gris oscuro para el fondo */
+    color: #ffffff; /* Texto en color blanco */
+    border: 1px solid #495057; /* Borde del botón */
+    border-radius: 5px; /* Borde redondeado */
+    padding: 5px 10px; /* Espaciado interno del botón */
+    text-decoration: none; /* Elimina el subrayado del enlace */
+    display: inline-block; /* Hace que el enlace se comporte como un bloque en línea */
+    font-weight: bold; /* Grosor del texto */
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+    .logout-button:hover {
+        background-color: #343a40; /* Gris más oscuro al pasar el cursor */
+        border-color: #343a40; /* Cambia el color del borde al pasar el cursor */
+        color: #ffffff; /* Cambia el color del texto al pasar el cursor */
+    }
+
+.row {
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+/*REGISTRO*/
+.contenedor-registro {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.registration-card {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con opacidad */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+}
+
+input {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    width: 30em;
+}
+
+.btn {
+    
+}
+
+.btn:hover {
+    background-color: #C4823A !important;
+
+}
+

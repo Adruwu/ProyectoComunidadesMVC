@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ProyectoComunidadesRelativo.Models.Community>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Tittle)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Theme)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Tittle)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Theme)
+				</td>
+				<td>
+					<a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id" style="background-color: var(--color-background); border-color: var(--color-background);">
+						<i class="fas fa-info-circle"></i> Details
+					</a>
+					@if (Context.Session.GetInt32("UserId") == item.Creator_id)
+					{
+						<a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id" style="background-color: var(--color-secondary); border-color: var(--color-secondary);">
+							<i class="fas fa-edit"></i> Edit
+						</a>
+						<a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id" style="background-color: var(--color-primary); border-color: var(--color-primary);">
+							<i class="fas fa-trash-alt"></i> Delete
+						</a>
+					}
+					else
+					{
+						<a class="btn btn-success" asp-action="Details" asp-route-id="@item.Id" style="background-color: var(--color-accent); border-color: var(--color-accent);">
+							<i class="fas fa-plus-circle"></i> Join
+						</a>
+					}
+					
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

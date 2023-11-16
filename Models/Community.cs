@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using ProyectoComunidadesRelativo.Controllers.Interfaces;
 
 namespace ProyectoComunidadesRelativo.Models
@@ -6,21 +7,24 @@ namespace ProyectoComunidadesRelativo.Models
     public class Community : IListable
     {
         public Community() { }
-        public Community(int id, string name, string theme, int numMembers)
+        public Community(int id, string tittle, string theme, int creator_id)
         {
             Id = id;
-            Name = name;
+            Tittle = tittle;
             Theme = theme;
+            Creator_id = creator_id;
         }
 
-        [Key]
-        public int Id { get; set; }
-        public string Name { get; set; }
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+		public int Id { get; set; }
+        public string Tittle { get; set; }
         public string Theme { get; set; }
+        public int Creator_id { get; set; }
 
         public override string ToString()
         {
-            return $"ID: {Id}, Name: {Name}, Theme: {Theme}";
+            return $"ID: {Id}, Tittle: {Tittle}, Theme: {Theme}, Creator_id: {Creator_id}";
         }
 
     }

@@ -1,62 +1,59 @@
-﻿﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ProyectoComunidadesRelativo</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - ProyectoComunidadesRelativo</title>
 </head>
-
 <body>
 
-    <header style="margin-bottom: 70px">
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
+	<header>
+		<nav class="navbar navbar-expand-sm navbar-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ProyectoComunidades</a>
 
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> ProyectoComunidades </a>
+				@if (!string.IsNullOrEmpty(Context.Session.GetString("Username")))
+				{
+					<p class="navbar-brand" style="text-align: right;">
+						Welcome, @Context.Session.GetString("Username")
+						<a class="logout-button" asp-area="" asp-controller="Home" asp-action="Index">
+							Logout
+						</a>
+					</p>
+				}
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+						aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</div>
+		</nav>
+	</header>
 
-                @* Collapse
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                </li>
-                </ul>
-                </div>
-                *@
+	<div class="container">
+		<main role="main">
+			@RenderBody()
+		</main>
+	</div>
 
-            </div>
-        </nav>
-    </header>
+	<footer class="footer">
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+		<div class="col-lg-12">
+			<p style="text-align: left; margin-left: 20px; margin-top: 10px;" class="small text-muted"> ProyectoComunidades | por: Adrián Mata Contreras</p>
+		</div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            Por: Adrián Mata Contreras
-        </div>
-    </footer>
-
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ProyectoComunidadesRelativo.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-KyZXEAg3QhqLMpG8r+Knujsl5+z0I5t9zwn1JLX6E5Hl95IpZjvh06BFU1PU29Mm22dk9Y2Hb5hdd6VsRDkmSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://kit.fontawesome.com/1fb4da45b6.js" crossorigin="anonymous"></script>
+	</footer>
 
 
-    @await RenderSectionAsync("Scripts", required: false)
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/ProyectoComunidadesRelativo.styles.css" asp-append-version="true" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+		  integrity="sha512-KyZXEAg3QhqLMpG8r+Knujsl5+z0I5t9zwn1JLX6E5Hl95IpZjvh06BFU1PU29Mm22dk9Y2Hb5hdd6VsRDkmSQ=="
+		  crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script src="https://kit.fontawesome.com/1fb4da45b6.js" crossorigin="anonymous"></script>
+
+	@await RenderSectionAsync("Scripts", required: false)
 
 </body>
 </html>

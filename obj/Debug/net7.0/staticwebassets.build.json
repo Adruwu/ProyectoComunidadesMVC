@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "buKsW8XuHzvDBn7grXJwSg9mytsg5ZmJq0uMuf6N008=",
+  "Hash": "xUmE4owlFt2o0QylvznlJjv6XyzuZ+3/KVYTVRopfxA=",
   "Source": "ProyectoComunidadesRelativo",
   "BasePath": "_content/ProyectoComunidadesRelativo",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\admata\\source\\repos\\ProyectoComunidadesRelativo\\wwwroot\\img\\wallpaper.jpg",
+      "SourceId": "ProyectoComunidadesRelativo",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\admata\\source\\repos\\ProyectoComunidadesRelativo\\wwwroot\\",
+      "BasePath": "_content/ProyectoComunidadesRelativo",
+      "RelativePath": "img/wallpaper.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\wallpaper.jpg"
     },
     {
       "Identity": "C:\\Users\\admata\\source\\repos\\ProyectoComunidadesRelativo\\wwwroot\\js\\site.js",

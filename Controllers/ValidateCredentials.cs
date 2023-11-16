@@ -34,11 +34,11 @@ namespace ProyectoComunidadesRelativo.Controllers
         {
             _context = context;
         }
-        
-        public bool IsValidUser(string username, string password)
+
+        public User GetUser(string username, string password)
         {
-            var user = _context.Users.FirstOrDefault(u => u.Username == username && u.Pass == password);
-            return user != null;
+            return _context.Users.FirstOrDefault(u => u.Username == username && u.Pass == password);
         }
+
     }
 }

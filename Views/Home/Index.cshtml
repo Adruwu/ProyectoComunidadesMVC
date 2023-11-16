@@ -2,21 +2,57 @@
     ViewData["Title"] = "Página Principal";
 }
 
+<style>
+    .text-center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 50vh;
+    }
+
+    .display-4 {
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .button-container {
+        display: flex;
+        gap: 20px;
+    }
+
+    .custom-button {
+        height: 50px;
+        width: 150px;
+        font-size: 16px;
+        background-color: #d58936;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .custom-button:hover {
+            background-color: #9b6544;
+        }
+</style>
+
 <div class="text-center">
 
     <h1 class="display-4">ProyectoComunidades</h1>
 
     <div class="button-container">
 
-        <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Register">
+        <a class="text-dark" asp-area="" asp-controller="Users" asp-action="Register">
             <button class="custom-button">Register</button>
         </a>
 
-        <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Login">
+        <a class="text-dark" asp-area="" asp-controller="Users" asp-action="Login">
             <button class="custom-button">Login</button>
         </a>
 
     </div>
 
 </div>
-

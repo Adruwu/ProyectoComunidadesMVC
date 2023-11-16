@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\admata\\source\\repos\\ProyectoComunidadesRelativo\\wwwroot\\img\\wallpaper.jpg",
+      "PackagePath": "staticwebassets\\img\\wallpaper.jpg"
+    },
+    {
       "Id": "C:\\Users\\admata\\source\\repos\\ProyectoComunidadesRelativo\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
